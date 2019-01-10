@@ -40,7 +40,8 @@ def showerbot():
     r = praw.Reddit(username='Fuzzy_Operation',
                     password='password',
                     client_id='WyGJqOVYj6BN2A',
-                    client_secret='4I7ADyN3rSW5I03JaoK0fLzHm4s')
+                    client_secret='4I7ADyN3rSW5I03JaoK0fLzHm4s',
+                    user_agent='testing reddit')
 
     try:
         for submissions in r.subreddit('showerthoughts').top(time_filter='day',limit=1):
