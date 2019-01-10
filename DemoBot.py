@@ -11,7 +11,8 @@ def hello_world():
     return 'Hello, World!'
 
 # You can access demobot’s greet command via <your website>/greet
-@app.route('/greet')
+# Slack can message “hi bot” via <your website>/greet
+@app.route('/greet', methods=['GET', 'POST'])
 def greet_person():
     # Get the value of the 'name' query parameter
     # request.values is a dictionary (cool!)
@@ -20,7 +21,7 @@ def greet_person():
 
     return f'hi {name}!'
 
-@app.route('/temperature')
+@app.route('/temperature', methods=['GET', 'POST'])
 def temperature():
     temp = request.values.get('temp')
 
@@ -31,7 +32,7 @@ def temperature():
             return f'It\'s {temp} degrees!'
     
     except:
-        return 'unexpected input'
+        return 'Please give a valid temperature'
 
 if __name__ == '__main__':
     # Start the web server!
