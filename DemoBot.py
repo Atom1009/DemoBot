@@ -1,5 +1,6 @@
 # Import flask
 from flask import Flask, request
+import praw
 
 # Create your app (web server)
 app = Flask(__name__)
@@ -33,6 +34,20 @@ def temperature():
     
     except:
         return 'Please give a valid temperature'
+
+@app.route('/showerbot', methods=['GET', 'POST'])
+def showerbot():
+    r = praw.Reddit(username='Fuzzy_Operation',
+                    password='password',
+                    client_id='WyGJqOVYj6BN2A',
+                    client_secret='4I7ADyN3rSW5I03JaoK0fLzHm4s')
+
+    try:
+        for submissions in r.subreddit('showerthoughts').top(time_filter='day',limit=1):
+            return submissions.title
+
+    except:
+        return 'FAIL'
 
 if __name__ == '__main__':
     # Start the web server!
