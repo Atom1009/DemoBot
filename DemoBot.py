@@ -34,11 +34,6 @@ def temperature():
     except:
         return 'Please give a valid temperature'
 
-@app.route('/chatbot', methods=['GET', 'POST'])
-def chat():
-    val = request.values.get('text')
-    return val['challenge']
-
 if __name__ == '__main__':
     # Start the web server!
     app.run()
