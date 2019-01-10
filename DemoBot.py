@@ -19,7 +19,7 @@ def greet_person():
     name = request.values.get('text')
     # This bot says hi to every name it gets sent!
 
-    return f'hi {name}!'
+    return f'Hi {name} my name is botimus. Nice to meet you!'
 
 @app.route('/temperature', methods=['GET', 'POST'])
 def temperature():
