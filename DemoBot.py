@@ -1,7 +1,7 @@
 # Import flask
 from flask import Flask, request
 import praw
-import random
+from random import randint
 
 # Create your app (web server)
 app = Flask(__name__)
@@ -21,9 +21,9 @@ def greet_person():
     name = request.values.get('text')
     # This bot says hi to every name it gets sent!
 
-    return f'Hi {name} my name is botimus. Nice to meet you!'
+    return f'Hi {name} my name is ShowerBot. Nice to meet you!'
 
-@app.route('/temperature', methods=['GET', 'POST'])
+@app.route('/temp', methods=['GET', 'POST'])
 def temperature():
     temp = request.values.get('text')
 
@@ -45,15 +45,16 @@ def showerbot():
                     user_agent='testing reddit')
 
     try:
-        r = random.randint(0,9)
+        n = 20
+        rand = randint(0,n-1)
         l = []
-        for submissions in r.subreddit('showerthoughts').top(time_filter='hour',limit=10):
+        for submissions in r.subreddit('showerthoughts').top(time_filter='hour',limit=n):
             l.append(submissions.title)
-            
-        return l[r]
+
+        return l[rand]
 
     except:
-        return 'FAIL'
+        return 'I\'m sorry that request failed'
 
 if __name__ == '__main__':
     # Start the web server!
