@@ -1,6 +1,7 @@
 # Import flask
 from flask import Flask, request
 import praw
+import random
 
 # Create your app (web server)
 app = Flask(__name__)
@@ -44,8 +45,12 @@ def showerbot():
                     user_agent='testing reddit')
 
     try:
-        for submissions in r.subreddit('showerthoughts').top(time_filter='day',limit=1):
-            return submissions.title
+        r = random.randint(0,9)
+        l = []
+        for submissions in r.subreddit('showerthoughts').top(time_filter='hour',limit=10):
+            l.append(submissions.title)
+            
+        return l[r]
 
     except:
         return 'FAIL'
